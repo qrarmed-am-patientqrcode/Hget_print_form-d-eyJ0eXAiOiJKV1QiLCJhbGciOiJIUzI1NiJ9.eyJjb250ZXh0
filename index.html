@@ -1,0 +1,651 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+  <title>QR</title>
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      font-family: "Arial Unicode", Sans-serif;
+      font-size: 16px;
+      margin-top: 0;
+      margin-right: 0;
+      margin-bottom: 0;
+      margin-left: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .covidCert {
+      max-width: 900px;
+      padding-top: 15px;
+      padding-right: 15px;
+      padding-bottom: 15px;
+      padding-left: 15px;
+    }
+
+    .covidCert .covidTop {
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .covidCert .logoC,
+    .covidCert .patientC {
+      max-width: 200px;
+      max-height: 90px;
+      object-fit: contain;
+    }
+
+    .covidCert .patientC {
+      width: 100px;
+      max-height: 100px;
+      object-fit: contain;
+    }
+
+    .cert .patientC {
+      width: 150px;
+      max-height: 190px;
+    }
+
+    .covidCert .medInfo {
+      width: 100%;
+      text-align: center;
+      line-height: 1.5;
+      font-size: 16px;
+      padding-top: 5px;
+      padding-right: 15px;
+      padding-bottom: 5px;
+      padding-left: 0;
+    }
+
+    .covidCert .medInfo.nameCert {
+      background-color: rgb(66, 129, 108);
+      background-image: initial;
+      text-align: center !important;
+      font-size: 1.2rem;
+      color: rgb(255, 255, 255);
+      padding-top: 10px;
+      padding-right: 10px;
+      padding-bottom: 10px;
+      padding-left: 10px;
+    }
+
+    .covidCert .covidTop.certGen {
+      margin-bottom: 20px;
+    }
+
+    .covidCert .covidTop.certGen .medInfo {
+      text-align: left;
+    }
+
+    .covidCert .medInfo span {
+      display: inline-block;
+      line-height: normal;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .covidCert .patientInfo {
+      line-height: 1.5;
+      font-size: 13px;
+      margin-top: 25px;
+    }
+
+    .covidCert .patientInfo>div {
+      align-items: center;
+    }
+
+    .covidCert .patientInfo div>div {
+      justify-content: space-between;
+      padding-left: 10px;
+    }
+
+    .patient_info {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: left;
+    }
+
+    .covidCert .patient_info>div:first-child {
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: auto;
+      min-width: 300px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .covidCert .patient_info>div:last-child {
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: auto;
+      min-width: 150px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .covidCert .patient_info strong {
+      line-height: 1.1;
+      font-size: 0.9rem;
+    }
+
+    .covidCert .patient_info span em {
+      font-size: 12px;
+      margin-right: 10px;
+    }
+
+    .covidCert .patientInfo .text_patient {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .covidCert .patientInfo .text_patient strong {
+      line-height: 1.1;
+    }
+
+    .covidCert .patientInfo .text_patient strong em {
+      font-size: 0.7rem;
+      font-weight: normal;
+    }
+
+    .covidCert .patientInfo span em {
+      font-size: 12px;
+      margin-right: 10px;
+    }
+
+    .covidCert .testTable {
+      width: 100%;
+      display: table;
+      border-right-color: rgb(0, 0, 0);
+      border-right-style: solid;
+      border-right-width: 1px;
+      border-bottom-color: rgb(0, 0, 0);
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+      margin-top: 15px;
+      margin-right: 0;
+      margin-bottom: 15px;
+      margin-left: 0;
+    }
+
+    .covidCert .testTable .row {
+      display: table-row;
+    }
+
+    .covidCert .testTable .row.hd {
+      text-align: center;
+      font-weight: bold;
+      background-color: rgb(238, 238, 238);
+      background-image: initial;
+    }
+
+    .covidCert .testTable .row>div {
+      display: table-cell;
+      font-size: 12px;
+      border-top-color: rgb(0, 0, 0);
+      border-top-style: solid;
+      border-top-width: 1px;
+      border-right-color: initial;
+      border-right-style: initial;
+      border-right-width: 0;
+      border-bottom-color: initial;
+      border-bottom-style: initial;
+      border-bottom-width: 0;
+      border-left-color: rgb(0, 0, 0);
+      border-left-style: solid;
+      border-left-width: 1px;
+      padding-top: 5px;
+      padding-right: 5px;
+      padding-bottom: 5px;
+      padding-left: 5px;
+    }
+
+    .covidCert .testTable .row>div:last-child,
+    .covidCert .testTable .row>div:nth-last-child(+2) {
+      width: 150px;
+      text-align: center;
+    }
+
+    .covidCert .testDate {
+      font-size: 12px;
+    }
+
+    .covidCert .testDate strong {
+      font-size: 13px;
+    }
+
+    .covidCert .addressTest {
+      font-size: 12px;
+      margin-top: 20px;
+    }
+
+    .covidCert .addressTest span {
+      float: left;
+    }
+
+    .covidCert .addressTest span:nth-child(+2) {
+      line-height: 1.5;
+      font-weight: bold;
+      padding-left: 5px;
+    }
+
+    .covidCert .qr_block {
+      float: left;
+      width: 100%;
+      font-weight: bold;
+      font-size: 12px;
+      margin-top: 20px;
+    }
+
+    .covidCert .qr_text {
+      float: left;
+      font-weight: normal;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .covidCert .mobileT {
+      display: none;
+    }
+
+    .covidCert .qrCode {
+      float: left;
+      width: 128px;
+      height: 128px;
+      margin-top: 5px;
+      margin-right: 10px;
+    }
+
+    .covidCert .qr_flex {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .covidCert .printHide {
+      display: inline;
+    }
+
+    .red {
+      background-color: rgb(249, 213, 220);
+      background-image: initial;
+    }
+
+    .green {
+      background-color: rgb(225, 249, 244);
+      background-image: initial;
+    }
+
+    .grey {
+      background-color: rgb(248, 248, 248);
+      background-image: initial;
+    }
+
+    .stateName {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      text-transform: uppercase;
+      font-weight: bold;
+      padding-bottom: 15px;
+    }
+
+    .cert_link {
+      color: rgb(0, 80, 125);
+    }
+
+    @media screen AND (max-width: 750px) {
+      .covidCert .logoC {
+        max-width: 100px;
+      }
+
+      .covidCert .patientInfo>div {
+        align-items: flex-start;
+      }
+    }
+
+    @media screen AND (max-width: 710px) {
+      .stateName {
+        display: none;
+      }
+    }
+
+    @media screen AND (max-width: 610px) {
+      .covidCert .testTable {
+        display: none;
+      }
+
+      .covidCert .mobileT {
+        display: table;
+      }
+
+      .covidCert .covidTop div:nth-child(+2) {
+        order: 3;
+      }
+
+      .covidCert .covidTop div:nth-child(+3) {
+        order: 2;
+      }
+
+      .covidCert .covidTop {
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      .covidCert .covidTop.certGen {
+        justify-content: center;
+      }
+
+      .covidCert .medInfo {
+        text-align: center !important;
+        padding-top: 5px;
+        padding-right: 15px;
+        padding-bottom: 5px;
+        padding-left: 15px;
+        margin-top: 15px;
+      }
+
+      .covidCert .medInfo.nameCert {
+        font-size: 1rem;
+      }
+    }
+
+    @media screen AND (max-width: 500px) {
+      .covidCert .qr_block {
+        text-align: center;
+      }
+
+      .covidCert .qrCode {
+        float: none;
+        margin-top: 10px;
+        margin-right: auto;
+        margin-bottom: auto;
+        margin-left: auto;
+      }
+
+      .covidCert .qr_flex {
+        display: block;
+      }
+
+      .covidCert .cert>div {
+        display: block !important;
+        text-align: center;
+      }
+
+      .covidCert .cert .patient_info {
+        text-align: center;
+        padding-left: 0;
+      }
+
+      covidCert .cert .patient_info>div {
+        padding-left: 0 !important;
+      }
+    }
+
+    @media print {
+      html {
+        font-size: 15px;
+      }
+
+      .stateName {
+        display: block;
+      }
+
+      .stateName span {
+        width: 33.3%;
+        display: inline-block;
+        font-size: 15px;
+      }
+
+      .stateName span:nth-child(+2) {
+        text-align: center;
+      }
+
+      .stateName span:nth-child(+3) {
+        text-align: right;
+      }
+
+      .table_print {
+        width: 100%;
+        display: table;
+      }
+
+      .covidTop .certGen {
+        display: table-row;
+      }
+
+      .table_print .medInfo {
+        width: 100%;
+        display: table-cell;
+      }
+
+      .covidCert .table_print .covidTop {
+        display: table-row;
+      }
+
+      .covidCert .table_print .covidTop>div {
+        display: table-cell;
+      }
+
+      .covidCert .table_print .covidTop:nth-child(+2) {
+        white-space: normal;
+      }
+
+      .covidCert .covidTop>* {
+        vertical-align: middle;
+      }
+
+      .covidCert .medInfo {
+        display: inline-block;
+      }
+
+      .covidCert .patientInfo {
+        width: 100%;
+        display: table;
+      }
+
+      .table_print.patientInfo>div {
+        display: table-row !important;
+      }
+
+      .covidCert .table_print.patientInfo>div>div {
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+      .covidCert .patientInfo div>div {
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      .covidCert .patientInfo .text_patient>div:last-child {
+        float: right;
+      }
+
+      .covidCert .patientC {
+        max-height: none;
+      }
+
+      @page {
+        margin-top: 20px;
+        margin-right: 0;
+        margin-bottom: 0;
+        margin-left: 20px;
+        padding-top: 0;
+        padding-right: 0;
+        padding-bottom: 0;
+        padding-left: 0;
+      }
+
+      br {
+        line-height: 10pt;
+      }
+
+      covidCert .medInfo {
+        margin-top: 8pt;
+      }
+
+      .covidCert .addressTest {
+        margin-top: 8pt;
+      }
+
+      .covidCert .testTable {
+        margin-bottom: 0;
+      }
+
+      .covidCert .qr_block {
+        margin-top: 5pt;
+      }
+
+      .covidCert .logoC {
+        max-width: 100px;
+      }
+
+      .covidCert .printHide {
+        display: none;
+      }
+
+      * {}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="covidCert">
+    <div class="stateName"><span>Հայաստանի Հանրապետություն</span><span>Republic of Armenia</span><span>Республика
+        Армения</span></div>
+    <div class="table_print">
+      <div class="covidTop certGen">
+        <div class="medInfo">
+          <span>Հայաստանի Հանրապետությունում էլեկտրոնային <br>առողջապահության միասնական տեղեկատվական համակարգ</span><br>
+          <span><strong>The United Information System of Electronic <br>Healthcare in the Republic of
+              Armenia</strong></span><br>
+          <span>Единая Информационная Система Электронного <br>Здравоохранения в Республике Армения</span><br>
+        </div>
+        <img src="AQYAFD1a5WAiOeAAAAAASUVORK5CYII=.png" class="logoC">
+      </div>
+    </div>
+    <div class="table_print">
+      <div class="covidTop certGen">
+        <div class="medInfo nameCert">
+          <span>COVID-19 ՊԱՏՎԱՍՏՄԱՆ ՍԵՐՏԻՖԻԿԱՏ</span><br>
+          <span>COVID-19 VACCINATION CERTIFICATE</span><br>
+          <span>СЕРТИФИКАТ ВАКЦИНАЦИИ COVID-19</span><br>
+        </div>
+      </div>
+    </div>
+    <div class="patientInfo cert table_print">
+      <div style="display: flex;">
+        <img style="" src="harut.jpg" class="patientC">
+        <div class="text_patient">
+          <div>
+            <div class="patient_info">
+              <div><em>Անուն / Имя<br>
+                  <strong>Given Name</strong></em></div>
+              <div><strong>ՀԱՐՈՒԹՅՈՒՆ<br>HARUTYUN</strong></div>
+            </div>
+            <div class="patient_info">
+              <div><em>Ազգանուն <br>
+                  <strong>Surname</strong> / Фамилия</em></div>
+              <div><strong>ՆՈՐԻԿՅԱՆ<br>NORIKYAN</strong></div>
+            </div>
+            <div class="patient_info">
+              <div><em>Ծննդյան ամսաթիվ<br>
+                  <strong>Date of Birth</strong> / Дата рождения</em></div>
+              <div><strong>17/**/****</strong></div>
+            </div>
+            <div class="patient_info">
+              <div><em>Անձնագրի / Նույն. քարտի համարը<br>
+                  <strong>Passport / ID No</strong> / Номер паспорта / ИК</em></div>
+              <div><strong>*****3834</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="testTable">
+      <div class="row hd">
+        <div style="width: 200px;">Պատվաստանյութի անվանում<br>Vaccine name<br>Наименование вакцины</div>
+        <div style="width: 200px; font-size: 10px;">Գրանցման հավաստագրի իրավատեր/արտադրող<br>Vaccine marketing
+          authorization holder or manufacturer<br>Владелец регистрационного удостоверения/производитель</div>
+        <div>Սերիա<br>Batch<br>Серия</div>
+        <div>Պատվաստման ամսաթիվը/<br>Vaccine date/<br>Дата вакцинации</div>
+        <div>Պատվաստող բուժհաստատություն<br>Certificate issuer<br>Медицинское учреждение</div>
+      </div>
+      <div class="row">
+        <div>
+          Sinopharm (2/2) <br><br><a class="cert_link" name="certlink" href="#">
+            EU
+            Սերտիֆիկատի համար սեղմեք այստեղ <img style="float: left; margin-right: 5px; width: 65px;"
+              src="yfAABY6DqsnTslrAAAAAElFTkSuQmCC.png"></a>
+        </div>
+        <div>
+          Պեկինի կենսաբանական պրեպարատների ինստիտուտ, Co., Ltd. (BIBP)<br>Beijing Institute of Biological Products Co.,
+          Ltd. (BIBP)<br>Пекинский институт биологических продуктов Co., Ltd. (BIBP)<br> </div>
+        <div>202109B3072 </div>
+        <div style="font-weight: bold;">01/02/2022</div>
+        <div>Թիվ 17 պոլիկլինիկա ՓԲԸ<br>"POLYCLINIC N 17" JCSC<br>ЗАО "ПОЛИКЛИНИКА N 17"
+        </div>
+      </div>
+    </div>
+    <div class="testTable mobileT">
+      <div class="row hd">
+        <div>Արտադրական անվանում/Vaccine medical product/Название вакцины</div>
+        <div style="width: 200px;">Պատվաստող բուժհաստատություն/Certificate issuer/Медицинское учреждение</div>
+      </div>
+      <div class="row">
+        <div>Sinopharm (2/2)<br>
+          02/12/2021<br>202145B3068<br>Beijing Institute of Biological Products Co., Ltd. (BIBP) <br><a
+            class="cert_link" name="certlink" href="#">
+            EU Սերտիֆիկատի
+            համար սեղմեք այստեղ <br><img style="width: 65px; margin-top: 5px;"
+              src="yfAABY6DqsnTslrAAAAAElFTkSuQmCC.png"></a><br>
+        </div>
+        <div>Թիվ 17 պոլիկլինիկա ՓԲԸ<br>"POLYCLINIC N 17" JCSC<br>ЗАО "ПОЛИКЛИНИКА N 17"
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="qr_block" style="page-break-inside: avoid;">
+
+      <div class="qr_flex">
+        <div id="61f8fc121b667_qrTarget" class="qrCode">
+          <img style="width: 128px; height: 128px;" src="wAWLPpjpvUUwQAAAABJRU5ErkJggg==.png">
+        </div>
+        <div class="qr_text" style="margin-top: 0px;">
+          Սկանավորեք QR կոդը արդյունքները<br>
+          <strong>Էլեկտրոնային Առողջապահության Ազգային Օպերատորի</strong> կայքում տեսնելու
+          համար<br> <strong>Scan QR code to see the results on the site of</strong><br>
+          <strong>National eHealth Operator</strong><br> Сканируйте QR код для просмотра результатов на сайте<br>
+          <strong>национального oператора электронного здравоохранения</strong><br>
+          Նույնականացման համար<br>
+          Unique certificate identifier<br>
+          Идентификационный номер<br>
+          <strong>1CA4504BBC87029845184F8C03610A06AE1B018E5BE644497</strong>
+        </div>
+      </div>
+      <br>
+      Սերտիֆիկատն արտահանված է (տպված է) ԱՐՄԵԴ համակարգից, (պացիենտի կողմից), 01/02/2022 13:23 <br>
+      The certificate is exported (printed) from ARMED system, (by patient), 01/02/2022 13:23 <br>
+      Сертификат экспортирован из системы ARMED, (пациентом), 01/02/2022 13:23
+    </div>
+    <br style="clear: both;">
+    <div style="float: left; width: 100%; clear: both;">
+    </div>
+  </div>
+
+</body>
+
+</html>
